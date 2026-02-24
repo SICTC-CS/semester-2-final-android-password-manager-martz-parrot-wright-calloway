@@ -6,7 +6,7 @@ Develop a functional Android password manager application using Java and Android
 
 ## Core Requirements
 
-### 1. User Authentication System
+### 1. User Authentication System --- Ryland
 
 * **Registration:**
     * Implement an email and password registration screen.
@@ -18,7 +18,7 @@ Develop a functional Android password manager application using Java and Android
     * Limit users to **three** incorrect login attempts. After the third failed attempt, the application should close (e.g., using `finishAffinity()`).
 * **Bonus:** Implement a "Forgot Password" feature using Firebase's password reset functionality.
 
-### 2. Password Requirements
+### 2. Password Requirements --- Ryland
 
 * All passwords (both for user registration *and* for the accounts being stored) must meet the following criteria:
     * Minimum 8 characters long.
@@ -59,7 +59,7 @@ Develop a functional Android password manager application using Java and Android
 * **Bonus:** Implement functionality to automatically fetch and display a relevant logo/image for the account based on its Name (e.g., search for "Netflix logo" if the name is "Netflix"). You might need an external image loading library like `Glide` or `Picasso` and potentially a simple web search API or a predefined mapping.
 * **Bonus:** Include a copy button for the phone to copy the password to the clip board.
 
-### 5. Filtering and Searching Accounts
+### 5. Filtering and Searching Accounts --- Devin
 
 * Implement a mechanism (e.g., a `Spinner` or filter menu) to allow users to filter the displayed `RecyclerView` list based on the **Category** they assigned to each account.
 * Implement a search functionality (e.g., using a `SearchView`) that allows users to filter the list by typing in the **Account Name** or the associated **Email/Username**.
