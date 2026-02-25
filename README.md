@@ -44,7 +44,7 @@ Develop a functional Android password manager application using Java and Android
 * **Bonus:** Add a toggle button (like an eye icon) next to the password input field to allow the user to show/hide the password they are entering.
 * * **Bonus:** Store the paswwords in Firebase encrypted. More advanced encryption, the more bonus points.
 
-### 4. Displaying Stored Accounts
+### 4. Displaying Stored Accounts --- Kaden
 
 * On the main screen after login, display all the user's stored accounts in a `RecyclerView`.
 * Each item in the `RecyclerView` should clearly display the **Account Name** and a **quick description** (you could use the Category or the first few words of the Notes).
