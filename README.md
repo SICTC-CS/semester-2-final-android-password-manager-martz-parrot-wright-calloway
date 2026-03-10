@@ -72,7 +72,7 @@ Develop a functional Android password manager application using Java and Android
     * **Crucially:** Implement a **confirmation dialog** (e.g., `AlertDialog`) asking the user to confirm this irreversible action before proceeding with the deletion.
 * **About Section:** Include an "About" section (perhaps within Settings or as a separate screen/dialog) displaying the app name, version (e.g., 1.0), and developer name(s).
 
-### 7. User Interface (UI) and User Experience (UX)
+### 7. User Interface (UI) and User Experience (UX) --- Devin
 
 * Design a clean, intuitive, and consistent user interface.
 * Ensure smooth navigation between screens.
