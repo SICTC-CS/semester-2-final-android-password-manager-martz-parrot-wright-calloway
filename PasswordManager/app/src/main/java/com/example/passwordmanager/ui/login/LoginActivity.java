@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
 
     boolean registerMode = false;
 
+    private int tries = 3;
     private AuthManager authManager;
 
 
@@ -60,6 +61,10 @@ public class LoginActivity extends AppCompatActivity {
                                 Snackbar.make(v,errorMessage,Snackbar.LENGTH_SHORT).show();
                                 errorText.setVisibility(VISIBLE);
                                 errorText.setText("Wrong Username or Password");
+                                tries -=1;
+                                if (tries == 0){
+                                    finishAffinity();
+                                }
                             }
                         }
                     });
@@ -73,7 +78,11 @@ public class LoginActivity extends AppCompatActivity {
                             public void onComplete(boolean success, String errorMessage) {
                                 if (success){
                                     Snackbar.make(v,"Success",Snackbar.LENGTH_SHORT).show();
-                                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                    username.setText("");
+                                    passwordInput.setText("");
+                                    registerMode = false;
+                                    loginBT.setText(getString(R.string.action_Login));
+                                    registerTXT.setText("Sign up");
                                 }else {
                                     Snackbar.make(v,errorMessage,Snackbar.LENGTH_SHORT).show();
                                 }
