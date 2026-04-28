@@ -46,7 +46,7 @@ Develop a functional Android password manager application using Java and Android
 
 ### 4. Displaying Stored Accounts --- Kaden
 
-* On the main screen after login, display all the user's stored accounts in a `RecyclerView`.
+* On the main screen after login, display all the user's stored accounts in a 'RecyclerView'.
 * Each item in the `RecyclerView` should clearly display the **Account Name** and a **quick description** (you could use the Category or the first few words of the Notes).
 * When a user taps on an item in the `RecyclerView`, navigate to a new "Details" screen.
 * The "Details" screen must display *all* the saved information for that specific account (Name, Email/Username, Password, Category, **URL (if provided)**, Notes).
