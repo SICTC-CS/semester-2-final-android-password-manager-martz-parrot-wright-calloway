@@ -69,10 +69,10 @@ public class AuthManager {
 
 
 
-    public boolean PasswordCheck(String password){
+    public boolean passwordCheck(String password){
         //from StackOverflow to find special characters
-        Pattern sp = Pattern.compile("[!@#$%^&*()_+=|<>?{}\\[\\]~-]"); //finds any character that is selected
-        Matcher sm = sp.matcher(password);
+        Pattern sp = Pattern.compile("[!@#$%^&*()_+=|<>?{}\\[\\]~-]"); //holds selected chars that are needed to be in the password
+        Matcher sm = sp.matcher(password); // Matcher takes a pattern and finds the chars that are in the pattern
 
         Pattern up = Pattern.compile("[A-Z]");
         Matcher um = up.matcher(password);

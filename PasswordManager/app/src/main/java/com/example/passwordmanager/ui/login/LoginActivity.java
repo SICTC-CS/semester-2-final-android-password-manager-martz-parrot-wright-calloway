@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                 else{
                     String user = username.getText().toString();
                     String password = passwordInput.getText().toString();
-                    if(authManager.PasswordCheck(password)){
+                    if(authManager.passwordCheck(password)){
                         authManager.signUP(user, password, new AuthManager.AuthCallback() {
                             @Override
                             public void onComplete(boolean success, String errorMessage) {
