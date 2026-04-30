@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.passwordmanager.AuthManager;
 import com.example.passwordmanager.MainActivity;
 import com.example.passwordmanager.R;
+import com.example.passwordmanager.data.model.LoggedInUser;
 import com.google.android.material.snackbar.Snackbar;
 
 public class LoginActivity extends AppCompatActivity {

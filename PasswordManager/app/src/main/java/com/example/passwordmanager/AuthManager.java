@@ -8,8 +8,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.lang.reflect.Array;
+import com.google.firebase.auth.FirebaseUser;
 
 // from stack overflow
 import java.util.regex.Matcher;
@@ -21,7 +20,6 @@ import java.util.regex.Pattern;
 public class AuthManager {
     private static final String TAG = "AuthManager";
     private FirebaseAuth auth;
-
     public AuthManager(){
         auth = FirebaseAuth.getInstance();
     }
@@ -60,8 +58,11 @@ public class AuthManager {
                 }
             }
         });
-    }
 
+    }
+    public FirebaseUser getActiveUser(){
+        return auth.getCurrentUser();
+    }
 
 
 
