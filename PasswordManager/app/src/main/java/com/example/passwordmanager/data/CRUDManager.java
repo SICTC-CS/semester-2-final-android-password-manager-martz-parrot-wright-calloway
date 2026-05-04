@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.passwordmanager.AuthManager;
 import com.example.passwordmanager.data.model.LoggedInUser;
 import com.example.passwordmanager.data.model.Acount;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,6 +19,7 @@ import java.util.List;
 
 
 public class CRUDManager {
+
     private FirebaseAuth auth;
     private static DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -36,7 +38,7 @@ public class CRUDManager {
     ///////// CREATE section /////////
     public void writeNewAcount(Acount t, CrudCallback callback){
         //set acount and get a reference
-        DatabaseReference currentRef = databaseReference.child("acounts");
+        DatabaseReference currentRef = databaseReference.child(String.join("","acounts/",new AuthManager().getActiveUser().getUid()));
 
         //generate a unique key using the push
         String fbid = currentRef.push().getKey();
@@ -55,7 +57,8 @@ public class CRUDManager {
     ///////// READ section /////////
     public static void readAllAcount(AcountListCallback callback) {
         //Go obtain a "snapshot" or current state of the DB
-        databaseReference.child("acounts").addValueEventListener(new ValueEventListener() {
+        databaseReference.child(String.join("","acounts/",new AuthManager().getActiveUser().getUid())).addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<Acount> tList = new ArrayList<>();
@@ -82,7 +85,7 @@ public class CRUDManager {
     ///////UPDATE SECTION ////////////
     public void updateAcount(Acount t, CrudCallback callback){
         //put the t where it should go
-        databaseReference.child("acounts").child(t.getId()).setValue(t).addOnCompleteListener(task -> {
+        databaseReference.child(String.join("","acounts/",new AuthManager().getActiveUser().getUid())).child(t.getId()).setValue(t).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 callback.onComplete(true,null);
             } else {
@@ -92,7 +95,7 @@ public class CRUDManager {
     /////////REMOVE SECTION//////////
     public void removeAcount(Acount t, CrudCallback callback){
         //remove the t
-        databaseReference.child("acounts").child(t.getId()).removeValue().addOnCompleteListener(task -> {
+        databaseReference.child(String.join("","acounts/",new AuthManager().getActiveUser().getUid())).child(t.getId()).removeValue().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 callback.onComplete(true,null);
             } else {

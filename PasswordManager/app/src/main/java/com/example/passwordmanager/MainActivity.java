@@ -2,6 +2,7 @@ package com.example.passwordmanager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private RecyclerView rvEvidenceStream;
     private static AcountAdapter adapter;
+    private CRUDManager crud = new CRUDManager();
     private List<Acount> acountList;
     private FirebaseUser user= new AuthManager().getActiveUser();
 
@@ -40,12 +42,32 @@ public class MainActivity extends AppCompatActivity {
         rvEvidenceStream = findViewById(R.id.rvEvidenceStream);
 
 
-
-        //Recycler and Adapters
+        //Recycler and Adapter
         adapter = new AcountAdapter(acountList);
-        adapter.importFirebaseData(user.getDisplayName());
+        adapter.importFirebaseData();
         rvEvidenceStream.setLayoutManager(new LinearLayoutManager(this));
         rvEvidenceStream.setAdapter(adapter);
+
+        FloatingActionButton fab = findViewById(R.id.fabAddAcount);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                crud.writeNewAcount(new Acount("test","test","test","test","test","test","test","test",5,5), new CRUDManager.CrudCallback() {
+                    @Override
+                    public void onComplete(boolean success, String errorMessage) {
+                        if(success){
+                            Log.d("writeNewAcount","succes");
+
+
+                        } else {
+                            Snackbar.make(MainActivity.this.getCurrentFocus(),errorMessage, Snackbar.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
+            }
+        });
 
 
     }

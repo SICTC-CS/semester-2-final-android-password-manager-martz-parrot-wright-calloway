@@ -93,15 +93,14 @@ public class AcountAdapter extends RecyclerView.Adapter<AcountAdapter.AcountView
     public int getItemCount() {
         return acountList.size();
     }
-    public void importFirebaseData(String user){
-        this.currentUser = user;
+    public void importFirebaseData(){
         CRUDManager.readAllAcount(new CRUDManager.AcountListCallback() {
             @Override
             public void onAcountsLoaded(List<Acount> acounts) {
-                masterList = new ArrayList<>(acounts.stream()
-                        .filter(acount -> acount.getOwner() != null && acount.getOwner().equals(user))
-                        .collect(Collectors.toList()));
-
+                masterList = new ArrayList<>(acounts);
+                acountList=masterList;
+                notifyDataSetChanged();
+                Log.d("Acount list", acounts.toString());
             }
             @Override
             public void onAcountsLoadedError(String errorMessage) {

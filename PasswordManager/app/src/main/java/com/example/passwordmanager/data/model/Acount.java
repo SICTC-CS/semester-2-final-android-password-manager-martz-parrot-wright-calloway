@@ -19,6 +19,9 @@ public class Acount implements Serializable {
         this.cost = cost;
     }
 
+    public Acount() {
+    }
+
     public String getService() {
         return service;
     }
