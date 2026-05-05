@@ -11,7 +11,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Press the Floating action button to make a test account\n
+I don't have the make account activity done yet!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +23,6 @@
         android:layout_height="0dp"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
         tools:listitem="@layout/display_acount" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

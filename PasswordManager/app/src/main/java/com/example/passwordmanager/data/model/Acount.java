@@ -2,20 +2,21 @@ package com.example.passwordmanager.data.model;
 
 import java.io.Serializable;
 public class Acount implements Serializable {
-    private String service, userName, password, owner, paymentInterval, email, category, link, id;
+    private String service,  password, paymentInterval, email, category, link, id;
     private long madeOn;
-    private int cost;
+    private boolean isSubscription;
+    private double cost;
 
-    public Acount(String service, String userName, String password, String owner, String paymentInterval, String email, String category, String link, long madeOn, int cost) {
+    public Acount(String service, String password, String paymentInterval, String email, String category, String link, String id, long madeOn, double cost, boolean isSubscription) {
         this.service = service;
-        this.userName = userName;
         this.password = password;
-        this.owner = owner;
         this.paymentInterval = paymentInterval;
         this.email = email;
         this.category = category;
         this.link = link;
+        this.id = id;
         this.madeOn = madeOn;
+        this.isSubscription = isSubscription;
         this.cost = cost;
     }
 
@@ -30,28 +31,12 @@ public class Acount implements Serializable {
         this.service = service;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
     }
 
     public String getPaymentInterval() {
@@ -94,7 +79,7 @@ public class Acount implements Serializable {
         this.madeOn = madeOn;
     }
 
-    public int getCost() {
+    public double getCost() {
         return cost;
     }
 

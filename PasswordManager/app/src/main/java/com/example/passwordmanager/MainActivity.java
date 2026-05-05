@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView rvEvidenceStream;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Recycler and Adapter
+//        acountList.add(new Acount("test","test","test","test","test","test","test",System.currentTimeMillis(),5.55, false));
         adapter = new AcountAdapter(acountList);
         adapter.importFirebaseData();
         rvEvidenceStream.setLayoutManager(new LinearLayoutManager(this));
@@ -52,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                crud.writeNewAcount(new Acount("test","test","test","test","test","test","test","test",5,5), new CRUDManager.CrudCallback() {
+                Random randy = new Random();
+                crud.writeNewAcount(new Acount("test","test","test","test","test","test","test",System.currentTimeMillis(), 1 + ((20 - 1) * randy.nextDouble()), false), new CRUDManager.CrudCallback() {
                     @Override
                     public void onComplete(boolean success, String errorMessage) {
                         if(success){

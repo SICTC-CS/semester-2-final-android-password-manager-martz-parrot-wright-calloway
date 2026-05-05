@@ -29,7 +29,7 @@ Develop a functional Android password manager application using Java and Android
 * Implement validation logic to check these requirements and provide feedback to the user if they are not met.
 *(Note: This applies primarily to the Email/Password registration and stored account passwords)*
 
-### 3. Storing Account Credentials --- Kaden`
+### 3. Storing Account Credentials --- Kaden
 
 * Create a dedicated screen (`Activity` or `Fragment`) for adding new account credentials, separate from the main account list view.
 * Each stored account entry must include at least:

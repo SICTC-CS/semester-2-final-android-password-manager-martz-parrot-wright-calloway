@@ -69,6 +69,7 @@ public class AcountAdapter extends RecyclerView.Adapter<AcountAdapter.AcountView
     public void onBindViewHolder(@NonNull AcountAdapter.AcountViewHolder holder, int position) {
         Acount t = acountList.get(position);
         holder.containerView.setTag(t); //field variable that holds the data
+        Log.d("Acount list--OnBind", t.toString());
 
         String serviceName = t.getService() != null ? t.getService() : "Unknown";
         String[] service = serviceName.split(" ");
@@ -83,11 +84,10 @@ public class AcountAdapter extends RecyclerView.Adapter<AcountAdapter.AcountView
             }
         }
         holder.tvService.setText("Service: " + String.join(" ", service));
-
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
-        holder.tvDate.setText("Date: "+sdf.format(new Date(t.getMadeOn())));
+        holder.tvDate.setText("Acount made on: "+sdf.format(new Date(t.getMadeOn())));
 
-        holder.tvCost.setText(String.format("$%.2f", t.getCost()));
+        holder.tvCost.setText(String.format("$%.2f", t.getCost())+" per "+t.getPaymentInterval());
     }
     @Override
     public int getItemCount() {
@@ -100,7 +100,7 @@ public class AcountAdapter extends RecyclerView.Adapter<AcountAdapter.AcountView
                 masterList = new ArrayList<>(acounts);
                 acountList=masterList;
                 notifyDataSetChanged();
-                Log.d("Acount list", acounts.toString());
+                Log.d("Acount list", acountList.toString());
             }
             @Override
             public void onAcountsLoadedError(String errorMessage) {
