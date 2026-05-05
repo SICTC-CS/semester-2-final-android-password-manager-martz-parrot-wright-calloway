@@ -1,11 +1,15 @@
 package com.example.passwordmanager.data;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.webkit.URLUtil;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -16,6 +20,7 @@ import com.example.passwordmanager.data.model.LoggedInUser;
 import com.example.passwordmanager.data.model.Acount;
 
 import java.io.Serializable;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,6 +38,7 @@ public class AcountAdapter extends RecyclerView.Adapter<AcountAdapter.AcountView
     private String currentUser;
 
     private double totalCosts = 0;
+    private Intent toWebsite;
 
     public AcountAdapter(List<Acount>aList){
         this.acountList = aList;
@@ -45,17 +51,22 @@ public class AcountAdapter extends RecyclerView.Adapter<AcountAdapter.AcountView
     public class AcountViewHolder extends RecyclerView.ViewHolder{
 
         public CardView containerView;
-        TextView tvService, tvDate, tvCost;
+        TextView tvService, tvDate, tvCost, tvType;
+        Button tvURL;
 
         View vIndicator;
 
         public AcountViewHolder(@NonNull View itemView) {
             super(itemView);
             tvService = itemView.findViewById(R.id.tvService);
+            tvURL = itemView.findViewById(R.id.tvURL);
             tvDate = itemView.findViewById(R.id.tvRowDate);
             tvCost = itemView.findViewById(R.id.tvRowAmount);
             vIndicator = itemView.findViewById(R.id.vIndicator);
+            tvType = itemView.findViewById(R.id.tvCatagory);
             containerView = itemView.findViewById(R.id.acount_card_layout);
+
+
         }
     }
     @NonNull
@@ -87,7 +98,25 @@ public class AcountAdapter extends RecyclerView.Adapter<AcountAdapter.AcountView
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
         holder.tvDate.setText("Acount made on: "+sdf.format(new Date(t.getMadeOn())));
 
+        if(t.getLink() != null && Patterns.WEB_URL.matcher(t.getLink()).matches()){
+            holder.tvURL.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("link button",t.getLink());
+                    Intent toWebsite = new Intent(Intent.ACTION_VIEW, Uri.parse(t.getLink()));
+                    if (toWebsite.resolveActivity(v.getContext().getPackageManager()) != null) {
+                        v.getContext().startActivity(toWebsite);
+                    }
+                    v.getContext().startActivity(toWebsite);
+                }
+            });
+        }
+
+
+        holder.tvType.setText(t.getCategory());
         holder.tvCost.setText(String.format("$%.2f", t.getCost())+" per "+t.getPaymentInterval());
+        if(t.isSubscription()==true){holder.tvCost.setVisibility( View.VISIBLE);}
+        else {holder.tvCost.setVisibility( View.INVISIBLE);}
     }
     @Override
     public int getItemCount() {

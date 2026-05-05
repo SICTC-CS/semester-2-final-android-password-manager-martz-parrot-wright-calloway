@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Random randy = new Random();
-                crud.writeNewAcount(new Acount("test","test","test","test","test","test","test",System.currentTimeMillis(), 1 + ((20 - 1) * randy.nextDouble()), false), new CRUDManager.CrudCallback() {
+                crud.writeNewAcount(new Acount("test","test","test","test","test","https://youtu.be/TFwXbp9bLlY?si=k6D5_94ssvVhp9lR","test",System.currentTimeMillis(), 1 + ((20 - 1) * randy.nextDouble()), randy.nextBoolean()), new CRUDManager.CrudCallback() {
                     @Override
                     public void onComplete(boolean success, String errorMessage) {
                         if(success){

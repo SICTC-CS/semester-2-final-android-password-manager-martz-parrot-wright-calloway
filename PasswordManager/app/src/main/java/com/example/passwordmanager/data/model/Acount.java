@@ -27,6 +27,14 @@ public class Acount implements Serializable {
         return service;
     }
 
+    public boolean isSubscription() {
+        return isSubscription;
+    }
+
+    public void setSubscription(boolean subscription) {
+        isSubscription = subscription;
+    }
+
     public void setService(String service) {
         this.service = service;
     }
@@ -83,7 +91,7 @@ public class Acount implements Serializable {
         return cost;
     }
 
-    public void setCost(int cost) {
+    public void setCost(double cost) {
         this.cost = cost;
     }
 
