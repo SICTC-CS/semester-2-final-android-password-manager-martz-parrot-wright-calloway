@@ -67,6 +67,10 @@ public class DetailsActivity extends AppCompatActivity {
                 }
             });
         }
+
+        if(a.isSubscription()==true){cost.setVisibility( View.VISIBLE);}
+        else {cost.setVisibility( View.INVISIBLE);}
+
         service.setText("Service:\n"+a.getService());
         name.setText("Name:\n"+a.getName());
         email.setText("Email:\n"+a.getEmail());

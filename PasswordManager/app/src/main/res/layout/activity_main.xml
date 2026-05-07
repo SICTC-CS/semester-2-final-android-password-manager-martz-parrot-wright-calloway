@@ -28,7 +28,7 @@ I don't have the make account activity done yet!"
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddAcount"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="6dp"
         android:layout_marginBottom="16dp"
