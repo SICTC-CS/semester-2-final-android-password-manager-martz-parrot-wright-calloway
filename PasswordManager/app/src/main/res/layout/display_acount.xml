@@ -39,7 +39,7 @@
             android:fontFamily="monospace"
             app:layout_constraintStart_toEndOf="@id/vIndicator"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvRowAmount"
+            app:layout_constraintEnd_toStartOf="@+id/tvCatagory"
             android:layout_marginEnd="8dp"/>
         <TextView
             android:id="@+id/tvCatagory"
@@ -80,13 +80,14 @@
             android:textSize="9sp"
             android:fontFamily="monospace"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/tvRowDate"
             app:layout_constraintStart_toEndOf="@id/vIndicator"
             android:layout_marginTop="4dp"/>
         <!-- Financial Impact (Amount) -->
         <TextView
             android:id="@+id/tvRowAmount"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="-$5.75 per Time"

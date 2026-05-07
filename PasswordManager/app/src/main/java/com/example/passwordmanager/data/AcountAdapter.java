@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.passwordmanager.DetailsActivity;
 import com.example.passwordmanager.R;
 import com.example.passwordmanager.data.model.LoggedInUser;
 import com.example.passwordmanager.data.model.Acount;
@@ -38,7 +39,6 @@ public class AcountAdapter extends RecyclerView.Adapter<AcountAdapter.AcountView
     private String currentUser;
 
     private double totalCosts = 0;
-    private Intent toWebsite;
 
     public AcountAdapter(List<Acount>aList){
         this.acountList = aList;
@@ -65,6 +65,15 @@ public class AcountAdapter extends RecyclerView.Adapter<AcountAdapter.AcountView
             vIndicator = itemView.findViewById(R.id.vIndicator);
             tvType = itemView.findViewById(R.id.tvCatagory);
             containerView = itemView.findViewById(R.id.acount_card_layout);
+            containerView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Acount a = (Acount) containerView.getTag();
+                    Intent i =new Intent(v.getContext(), DetailsActivity.class);
+                    i.putExtra("account",(Serializable) a);
+                    v.getContext().startActivity(i);
+                }
+            });
 
 
         }
@@ -99,6 +108,7 @@ public class AcountAdapter extends RecyclerView.Adapter<AcountAdapter.AcountView
         holder.tvDate.setText("Acount made on: "+sdf.format(new Date(t.getMadeOn())));
 
         if(t.getLink() != null && Patterns.WEB_URL.matcher(t.getLink()).matches()){
+            holder.tvURL.setVisibility(View.VISIBLE);
             holder.tvURL.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -108,13 +118,14 @@ public class AcountAdapter extends RecyclerView.Adapter<AcountAdapter.AcountView
                         v.getContext().startActivity(toWebsite);
                     }
                     v.getContext().startActivity(toWebsite);
+
                 }
             });
         }
 
 
         holder.tvType.setText(t.getCategory());
-        holder.tvCost.setText(String.format("$%.2f", t.getCost())+" per "+t.getPaymentInterval());
+        holder.tvCost.setText(String.format("$%.2f", t.getCost())+"/"+t.getPaymentInterval());
         if(t.isSubscription()==true){holder.tvCost.setVisibility( View.VISIBLE);}
         else {holder.tvCost.setVisibility( View.INVISIBLE);}
     }

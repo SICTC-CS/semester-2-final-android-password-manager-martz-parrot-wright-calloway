@@ -2,13 +2,14 @@ package com.example.passwordmanager.data.model;
 
 import java.io.Serializable;
 public class Acount implements Serializable {
-    private String service,  password, paymentInterval, email, category, link, id;
+    private String service, name, password, paymentInterval, email, category, link, id;
     private long madeOn;
     private boolean isSubscription;
     private double cost;
 
-    public Acount(String service, String password, String paymentInterval, String email, String category, String link, String id, long madeOn, double cost, boolean isSubscription) {
+    public Acount(String service, String name, String password, String paymentInterval, String email, String category, String link, String id, long madeOn, double cost, boolean isSubscription) {
         this.service = service;
+        this.name = name;
         this.password = password;
         this.paymentInterval = paymentInterval;
         this.email = email;
@@ -29,6 +30,14 @@ public class Acount implements Serializable {
 
     public boolean isSubscription() {
         return isSubscription;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setSubscription(boolean subscription) {

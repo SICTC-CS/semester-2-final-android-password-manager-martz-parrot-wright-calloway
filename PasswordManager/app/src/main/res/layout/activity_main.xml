@@ -10,7 +10,7 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:text="Press the Floating action button to make a test account\n
 I don't have the make account activity done yet!"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,16 +21,16 @@ I don't have the make account activity done yet!"
         android:id="@+id/rvEvidenceStream"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingHorizontal="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fabAddAcount"
         tools:listitem="@layout/display_acount" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddAcount"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="24dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginHorizontal="6dp"
         android:layout_marginBottom="16dp"
         android:src="@android:drawable/ic_input_add"
         app:backgroundTint="?attr/colorOnSecondary"
