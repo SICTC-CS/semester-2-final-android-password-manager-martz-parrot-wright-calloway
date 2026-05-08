@@ -64,10 +64,27 @@ public class AuthManager {
         return auth.getCurrentUser();
     }
 
+    public void logout() {
+        auth.signOut();
+    }
 
-
-
-
+    public void deleteAccount(final AuthCallback callback) {
+        FirebaseUser user = auth.getCurrentUser();
+        if (user != null) {
+            user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        callback.onComplete(true, null);
+                    } else {
+                        callback.onComplete(false, task.getException().getMessage());
+                    }
+                }
+            });
+        } else {
+            callback.onComplete(false, "No user signed in");
+        }
+    }
 
 
     public boolean passwordCheck(String password){

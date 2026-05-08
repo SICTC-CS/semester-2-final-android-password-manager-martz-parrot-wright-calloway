@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.passwordmanager.data.CRUDManager;
 import com.example.passwordmanager.ui.login.LoginActivity;
@@ -17,6 +19,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private AuthManager authManager;
     private CRUDManager crudManager;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,16 @@ public class SettingsActivity extends AppCompatActivity {
 
         authManager = new AuthManager();
         crudManager = new CRUDManager();
+        progressBar = findViewById(R.id.pbSettings);
+
+        Toolbar toolbar = findViewById(R.id.settingsToolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+        
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         Button btnAbout = findViewById(R.id.btnAbout);
         Button btnLogout = findViewById(R.id.btnLogout);
@@ -62,9 +75,11 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void deleteAccount() {
+        progressBar.setVisibility(View.VISIBLE);
         crudManager.deleteAllUserData((success, errorMessage) -> {
             if (success) {
                 authManager.deleteAccount((authSuccess, authError) -> {
+                    progressBar.setVisibility(View.GONE);
                     if (authSuccess) {
                         Toast.makeText(SettingsActivity.this, "Account deleted successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
@@ -76,6 +91,7 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                 });
             } else {
+                progressBar.setVisibility(View.GONE);
                 Toast.makeText(SettingsActivity.this, "Error deleting data: " + errorMessage, Toast.LENGTH_LONG).show();
             }
         });

@@ -38,7 +38,7 @@ public class CRUDManager {
     ///////// CREATE section /////////
     public void writeNewAcount(Acount t, CrudCallback callback){
         //set acount and get a reference
-        DatabaseReference currentRef = databaseReference.child(String.join("","acounts/",new AuthManager().getActiveUser().getUid()));
+        DatabaseReference currentRef = databaseReference.child("acounts").child(new AuthManager().getActiveUser().getUid());
 
         //generate a unique key using the push
         String fbid = currentRef.push().getKey();
@@ -57,7 +57,7 @@ public class CRUDManager {
     ///////// READ section /////////
     public static void readAllAcount(AcountListCallback callback) {
         //Go obtain a "snapshot" or current state of the DB
-        databaseReference.child(String.join("","acounts/",new AuthManager().getActiveUser().getUid())).addValueEventListener(new ValueEventListener() {
+        databaseReference.child("acounts").child(new AuthManager().getActiveUser().getUid()).addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -85,7 +85,7 @@ public class CRUDManager {
     ///////UPDATE SECTION ////////////
     public void updateAcount(Acount t, CrudCallback callback){
         //put the t where it should go
-        databaseReference.child(String.join("","acounts/",new AuthManager().getActiveUser().getUid())).child(t.getId()).setValue(t).addOnCompleteListener(task -> {
+        databaseReference.child("acounts").child(new AuthManager().getActiveUser().getUid()).child(t.getId()).setValue(t).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 callback.onComplete(true,null);
             } else {
@@ -95,12 +95,23 @@ public class CRUDManager {
     /////////REMOVE SECTION//////////
     public void removeAcount(Acount t, CrudCallback callback){
         //remove the t
-        databaseReference.child(String.join("","acounts/",new AuthManager().getActiveUser().getUid())).child(t.getId()).removeValue().addOnCompleteListener(task -> {
+        databaseReference.child("acounts").child(new AuthManager().getActiveUser().getUid()).child(t.getId()).removeValue().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 callback.onComplete(true,null);
             } else {
                 callback.onComplete(false,task.getException().getMessage());
             }});}
+
+    public void deleteAllUserData(CrudCallback callback) {
+        String uid = new AuthManager().getActiveUser().getUid();
+        databaseReference.child("acounts").child(uid).removeValue().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                callback.onComplete(true, null);
+            } else {
+                callback.onComplete(false, task.getException().getMessage());
+            }
+        });
+    }
 
     public static List<Acount> getAcountList(){
         return acountList;}

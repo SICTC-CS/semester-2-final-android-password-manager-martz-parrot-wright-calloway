@@ -5,127 +5,204 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="2dp"
-    app:cardBackgroundColor="#F4E6F6"
-    app:cardCornerRadius="30dp"
-    app:cardElevation="20dp"
+    android:background="#323232"
     tools:context=".DetailsActivity">
-    <androidx.cardview.widget.CardView
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/detailsToolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="2dp"
-        app:cardBackgroundColor="#323232"
-        app:cardCornerRadius="30dp"
-        app:cardElevation="20dp"
-        >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-        <androidx.cardview.widget.CardView
-            android:id="@+id/dHeaderHolder"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#424242"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:title="Account Details"
+        app:titleTextColor="#fd7000"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/detailsToolbar"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            app:cardBackgroundColor="#323232"
-            app:cardCornerRadius="30dp"
-            app:cardElevation="50dp"
-            >
+            android:padding="24dp">
+
             <TextView
-                android:id="@+id/dHeader"
+                android:id="@+id/tvLabelService"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Account Details:"
-                android:textColor="#fd7000"
-                android:layout_margin="10dp"
-                android:textSize="30sp"/>
+                android:text="Service"
+                android:textColor="#888888"
+                android:textSize="12sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/dService"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Service Name"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@id/tvLabelService"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/dService"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Service:\n"
-            android:textColor="#fd7000"
-            android:layout_margin="5dp"
-            android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/tvLabelName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Account Name"
+                android:textColor="#888888"
+                android:textSize="12sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/dService"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <TextView
                 android:id="@+id/dName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Account name:\n"
-                android:textColor="#fd7000"
-                android:layout_margin="5dp"
-                android:textSize="15sp"/>
+                android:text="Account name"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/tvLabelName"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tvLabelEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textColor="#888888"
+                android:textSize="12sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/dName"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <TextView
                 android:id="@+id/dEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Account email:\n"
-                android:textColor="#fd7000"
-                android:layout_margin="5dp"
-                android:textSize="15sp"/>
-            <LinearLayout
+                android:text="Account email"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/tvLabelEmail"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tvLabelPassword"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:textColor="#888888"
+                android:textSize="12sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/dEmail"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/llPasswordContainer"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center_vertical"
+                app:layout_constraintTop_toBottomOf="@id/tvLabelPassword">
+
                 <TextView
                     android:id="@+id/dPassword"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Account Password:\n"
-                    android:textColor="#fd7000"
-                    android:layout_margin="10dp"
-                    android:textSize="15sp"/>
-                <Button
-                    android:id="@+id/dShowPassword"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:backgroundTint="#fd7000"
-                    android:foreground="@android:drawable/ic_menu_view"
-                    android:foregroundTint="@color/black"/>
+                    android:layout_weight="1"
+                    android:text="********"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
 
+                <ImageButton
+                    android:id="@+id/dShowPassword"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@android:drawable/ic_menu_view"
+                    app:tint="#fd7000" />
             </LinearLayout>
+
             <TextView
-                android:id="@+id/dCost"
+                android:id="@+id/tvLabelCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cost:\n"
-                android:textColor="#fd7000"
-                android:layout_margin="10dp"
-                android:textSize="15sp"/>
+                android:text="Category"
+                android:textColor="#888888"
+                android:textSize="12sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/llPasswordContainer"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <TextView
                 android:id="@+id/dCatagory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cost:\n"
-                android:textColor="#fd7000"
-                android:layout_margin="10dp"
-                android:textSize="15sp"/>
+                android:text="Category Name"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/tvLabelCategory"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tvLabelCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cost"
+                android:textColor="#888888"
+                android:textSize="12sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/dCatagory"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/dCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$0.00"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/tvLabelCost"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tvLabelBirth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Created On"
+                android:textColor="#888888"
+                android:textSize="12sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/dCost"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <TextView
                 android:id="@+id/dBirth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Account made on:\n"
-                android:textColor="#fd7000"
-                android:layout_margin="10dp"
-                android:textSize="15sp"/>
+                android:text="Date"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/tvLabelBirth"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <Button
                 android:id="@+id/dURL"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginStart="12dp"
-                android:backgroundTint="#098E83"
-                android:text="Visit Site"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:fontFamily="monospace"
-                android:textStyle="bold"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="#fd6544"
+                android:text="Visit Website"
+                android:textColor="#111111"
                 android:visibility="gone"
-                android:layout_marginTop="4dp"/>
+                app:layout_constraintTop_toBottomOf="@id/dBirth" />
 
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

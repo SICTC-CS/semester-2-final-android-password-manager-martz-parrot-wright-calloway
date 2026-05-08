@@ -8,35 +8,65 @@
     android:background="#323232"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="Press the Floating action button to make a test account\n
-I don't have the make account activity done yet!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#424242"
+        app:title="SecurePass"
+        app:titleTextColor="#fd7000"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/llFilterContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="#424242"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/search_bg"
+            app:iconifiedByDefault="false"
+            app:queryHint="Search accounts..."
+            app:queryBackground="@android:color/transparent" />
+
+        <Spinner
+            android:id="@+id/spinnerCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:minWidth="100dp"
+            android:background="@drawable/spinner_bg"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvEvidenceStream"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingHorizontal="8dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/fabAddAcount"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/llFilterContainer"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/display_acount" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddAcount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="6dp"
-        android:layout_marginBottom="16dp"
+        android:layout_margin="24dp"
         android:src="@android:drawable/ic_input_add"
-        app:backgroundTint="?attr/colorOnSecondary"
+        app:backgroundTint="#fd6544"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="#9C9B9B" />
-
+        app:tint="#111111" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
