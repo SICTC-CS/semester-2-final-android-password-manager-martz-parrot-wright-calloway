@@ -1,5 +1,6 @@
 package com.example.passwordmanager.data;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
@@ -10,8 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.webkit.URLUtil;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +22,7 @@ import com.example.passwordmanager.DetailsActivity;
 import com.example.passwordmanager.R;
 import com.example.passwordmanager.data.model.LoggedInUser;
 import com.example.passwordmanager.data.model.Acount;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.Serializable;
 import java.net.URL;
@@ -39,6 +43,7 @@ public class AcountAdapter extends RecyclerView.Adapter<AcountAdapter.AcountView
     private String currentUser;
 
     private double totalCosts = 0;
+    private CRUDManager crud = new CRUDManager();
 
     public AcountAdapter(List<Acount>aList){
         this.acountList = aList;
@@ -72,6 +77,41 @@ public class AcountAdapter extends RecyclerView.Adapter<AcountAdapter.AcountView
                     Intent i =new Intent(v.getContext(), DetailsActivity.class);
                     i.putExtra("account",(Serializable) a);
                     v.getContext().startActivity(i);
+                }
+            });
+            containerView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    Acount a = (Acount) containerView.getTag();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                    builder.setTitle("Confirm Deletion");
+                    builder.setMessage("Are you sure you want to proceed?");
+                    builder.setIcon(android.R.drawable.ic_menu_delete);
+                    builder.setPositiveButton("Yes, Delete.", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            crud.removeAcount(a, new CRUDManager.CrudCallback() {
+                                @Override
+                                public void onComplete(boolean success, String errorMessage) {if(!success){Snackbar.make(v,errorMessage, Snackbar.LENGTH_SHORT).show();}}
+                            });
+                            Toast.makeText(v.getContext(), a.getService()+" Account Deleted",Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+
+                    builder.setNegativeButton("No, Nevermind.", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss(); // Closes the popup
+                        }
+                    });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+
+
+                    return false;
                 }
             });
 
